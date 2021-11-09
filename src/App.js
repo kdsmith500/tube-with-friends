@@ -1,23 +1,25 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
+
+import Main from './pages/Main';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Profile from './pages/Profile';
+import Channel from './pages/Channel';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <Routes>
+        <Route exact path="/" element={<Main />} />
+        <Route exact path="/signIn" element={<SignIn />} />
+        <Route exact path="/signUp" element={<SignUp />} />
+        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/channel/:id" element={<Channel />} />
+      </Routes>
+    </main>
   );
 }
 
