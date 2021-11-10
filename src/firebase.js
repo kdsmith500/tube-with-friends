@@ -24,3 +24,43 @@ export const provider = new GoogleAuthProvider(auth);
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
 export const signInWithEmailAndPass = (email, password) => signInWithEmailAndPassword(auth, email, password);
 export const signOutAuth = () => signOut(auth);
+
+export const createUserProfileDocument = async (user, additionalData) => {
+  if (!user) return; // if no user break function
+
+  // get a reference to the place in the database where a user profile might be
+  const userRef = await doc(db, 'users', user.uid);
+  
+  // go and fetch the document from that location
+  const snapshot = await getDoc(userRef);
+
+  if (!snapshot.exists()) {
+    const { displayName, email, photoURL } = user;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userRef, {
+        displayName,
+        email,
+        photoURL,
+        createdAt,
+        ...additionalData
+      })
+    } catch (error) {
+    }
+  }
+
+  return getUserDocument(user.uid);
+}
+
+export const getUserDocument = async (uid) => {
+  if (!uid) return null;
+
+  try {
+    return doc(db, 'users', uid);
+  } catch (error) {
+    console.error('Error fetching user', error.message);
+  }
+}
+
+export default firebaseApp;

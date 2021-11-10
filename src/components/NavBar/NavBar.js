@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './NavBar.css';
 
-const user = true; // might wrap the app in a userProvider, otherwise it will be passed here
+import { signOutAuth } from '../../firebase';
+import { UserContext } from '../../providers/userProvider';
 
-const NavBar = () => {  
+// const user = false; // might wrap the app in a userProvider, otherwise it will be passed here
+
+const NavBar = () => { 
+  const user = useContext(UserContext);
+
   return <header className="NavBar-wrapper">
     <div className="NavBar">
-      <Link className="left" to="/">
+      <Link className="left" to="/" onClick={signOutAuth}>
           <div className="left-icon-outer">
             <div className="left-icon-inner"></div>
           </div>

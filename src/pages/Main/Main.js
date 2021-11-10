@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './Main.css';
 
 import NavBar from '../../components/NavBar';
 import ChannelList from '../../components/ChannelList';
+import { UserContext } from '../../providers/userProvider';
 
-const user = true; //will pass in user from auth to determine logged in status
 
 const Main = () => {  
+  const user = useContext(UserContext);
+  
   return <div>{user ? 
     <article>
       <NavBar />

@@ -6,10 +6,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import UserProvider from './providers/userProvider';
 
 render(
   <Router>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </Router>,
   document.getElementById('root')
 );

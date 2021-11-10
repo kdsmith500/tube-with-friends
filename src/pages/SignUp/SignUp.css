@@ -7,24 +7,6 @@
   width: 600px;
 }
 
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 18px 0;
-}
-
-.divider-text {
-  color: gray;
-  padding-bottom: 4px;
-  margin: 0 24px;
-}
-
-.divider-line {
-  border: 1px solid gray;
-  width: 200px;
-}
-
 .temp {
   border-radius: 25pt;
   background-color: #2941AB;
