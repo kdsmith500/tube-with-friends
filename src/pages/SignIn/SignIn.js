@@ -3,7 +3,6 @@ import React from 'react';
 import './SignIn.css';
 
 import NavBar from '../../components/NavBar';
-import SignInForm from '../../components/SignInForm';
 
 const SignIn = () => {  
   return <article>
@@ -16,7 +15,16 @@ const SignIn = () => {
         <div className="divider-text">or</div>
         <hr className="divider-line" />
       </div>
-      <SignInForm />
+
+      <div className="sign-in-form-wrapper">
+        <form className="sign-in-form">
+          <label htmlFor="email">Email</label>
+          <input type="text" name="email" placeholder="Email"></input>
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" placeholder="Password"></input>
+          <input className="button" type="submit" value="Sign In"></input>
+        </form>
+      </div>
     </section>
   </article>;
 };
