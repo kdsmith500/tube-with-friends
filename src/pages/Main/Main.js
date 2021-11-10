@@ -3,19 +3,25 @@ import React from 'react';
 import './Main.css';
 
 import NavBar from '../../components/NavBar';
+import ChannelList from '../../components/ChannelList';
 
-const user = false; //will pass in user from auth to determine logged in status
+const user = true; //will pass in user from auth to determine logged in status
 
 const Main = () => {  
   return <div>{user ? 
-    <div>
+    <article>
       <NavBar />
       <section className="main-logged-in">
-        'logged in'
+        <aside className="channel-list">
+          <ChannelList />
+        </aside>
+        <section className="youtube-content">
+          youTube content, popular vids or recents or some cheap query...
+        </section>
       </section>
-    </div>
+    </article>
     :
-    <div>
+    <article>
       <NavBar />
       <section className="main-logged-out">
         <div className="main-logged-out-header">
@@ -28,7 +34,7 @@ const Main = () => {
         <div className="circle-three"></div>
       </section>
 
-    </div>
+    </article>
   }</div>;
 };
 

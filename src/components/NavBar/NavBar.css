@@ -1,5 +1,5 @@
 .NavBar-wrapper {
-  background-color: snow;
+  background-color: white;
   color: black;
   height: 80px;
   display: flex;
@@ -59,4 +59,8 @@
 .right-second {
   text-decoration: none;
   margin-right: 24px;
+}
+
+.details-option {
+  text-decoration: none;
 }
