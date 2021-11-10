@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import './SignUp.css';
@@ -14,6 +15,7 @@ const initialState = {
 
 const SignUp = () => {  
   const [state, setState] = useState(initialState);
+  let navigate = useNavigate();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -24,11 +26,11 @@ const SignUp = () => {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
       createUserProfileDocument(user, { displayName });
+      clear();
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
-
-    clear();
   };
 
   const handleChange = event => {

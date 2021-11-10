@@ -26,6 +26,8 @@ const UserProvider = ( props ) => {
         }
   
         setUser(userAuth);
+
+        console.log(props)
       })
     }
 
@@ -36,7 +38,7 @@ const UserProvider = ( props ) => {
     };
 
     return cleanup;
-  }, []);
+  }, [props]);
 
   return (
     <UserContext.Provider value={user}>{props.children}</UserContext.Provider>

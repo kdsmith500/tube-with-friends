@@ -1,19 +1,23 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './NavBar.css';
 
 import { signOutAuth } from '../../firebase';
 import { UserContext } from '../../providers/userProvider';
 
-// const user = false; // might wrap the app in a userProvider, otherwise it will be passed here
-
 const NavBar = () => { 
   const user = useContext(UserContext);
+  let navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOutAuth();
+    navigate('/');
+  }
 
   return <header className="NavBar-wrapper">
     <div className="NavBar">
-      <Link className="left" to="/" onClick={signOutAuth}>
+      <Link className="left" to="/">
           <div className="left-icon-outer">
             <div className="left-icon-inner"></div>
           </div>
@@ -23,11 +27,11 @@ const NavBar = () => {
       <div>{user ?
         <div className="right">
           <details className="right-second">
-            <summary>Hey, Bill</summary>
+            <summary>Hey, Buddy</summary>
             <Link className="details-option" to="/profile">Profile</Link>
-            <div className="details-option-bottom">Sign Out</div>
+            <div className="details-option-bottom" onClick={handleSignOut}>Sign Out</div>
           </details>
-          <img className="right-first" src="https://www.fillmurray.com/50/50" alt="profile avatar"/>
+          <img className="right-first" src="https://placekitten.com/50/50" alt="profile avatar"/>
         </div>
         :
         <nav className="right">
