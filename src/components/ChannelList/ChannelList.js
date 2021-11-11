@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChannelsContext } from '../../providers/channelsProvider';
 
@@ -11,15 +11,24 @@ const ChannelList = () => {
     return a.createdAt.toDate() - b.createdAt.toDate();
   })
 
+  const handleHover = event => {
+    return event.target.nextElementSibling.hidden = !event.target.nextElementSibling.hidden;
+  }
+
   return <section className="channel-list">
     {channels.map(channel => {
-      return <Link
-        className="channel"
-        key={channel.id}
-        to={`/channel/${channel.id}`}
-      >
-        {channel.channelName}
-      </Link>
+      return <div className="channel">
+        <Link
+          className="channel-link"
+          key={channel.id}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
+          to={`/channel/${channel.id}`}
+        >
+          {channel.channelName}
+        </Link>
+        <label htmlFor={channel.id} className="channel-list-label" hidden={true}>{channel.description}</label>
+      </div>
     })}
   </section>;
 };
