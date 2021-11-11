@@ -28,7 +28,7 @@ const ChannelsProvider = ( props ) => {
     };
 
     return cleanup;
-  }, [props]);
+  }, []);
 
   return (
     <ChannelsContext.Provider value={channels}>{props.children}</ChannelsContext.Provider>

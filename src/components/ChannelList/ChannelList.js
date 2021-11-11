@@ -7,7 +7,10 @@ import './ChannelList.css';
 const ChannelList = () => { 
   const channels = useContext(ChannelsContext);
 
-    console.log(channels)
+  channels.sort((a, b) => {
+    return a.createdAt.toDate() - b.createdAt.toDate();
+  })
+
   return <section className="channel-list">
     {channels.map(channel => {
       return <Link

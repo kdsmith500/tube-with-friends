@@ -13,7 +13,7 @@ const initialState = {
 
 const SignIn = () => {  
     const [form, setForm] = useState(initialState);
-    let navigate = useNavigate()
+    const navigate = useNavigate()
   
     const handleSubmit = async event => {
       event.preventDefault();

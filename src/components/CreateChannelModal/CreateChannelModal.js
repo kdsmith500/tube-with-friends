@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 import './CreateChannelModal.css';
 
@@ -12,6 +13,7 @@ const initialState = {
 
 const CreateChannelModal = ({ toggle }) => { 
   const [form, setForm] = useState(initialState);
+  const navigate = useNavigate()
 
   const handleChange = event => {
     setForm(prevState => {
@@ -39,10 +41,13 @@ const CreateChannelModal = ({ toggle }) => {
       createdAt: new Date(),
     }
 
-    addDoc(channelsQ, channel);
-
-    setForm(initialState);
-    toggle();
+    addDoc(channelsQ, channel)
+      .then(docRef => {
+        setForm(initialState);
+        toggle();
+        navigate(`/channel/${docRef.id}`)
+      })
+      .catch(error => console.error(error));
   };
 
   return <section className="create-channel-modal">
