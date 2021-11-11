@@ -14,13 +14,13 @@ const initialState = {
 }
 
 const SignUp = () => {  
-  const [state, setState] = useState(initialState);
+  const [form, setForm] = useState(initialState);
   let navigate = useNavigate();
 
   const handleSubmit = async event => {
     event.preventDefault();
 
-    const { email, password, displayName } = state;
+    const { email, password, displayName } = form;
 
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -34,13 +34,13 @@ const SignUp = () => {
   };
 
   const handleChange = event => {
-    setState(prevState => {
+    setForm(prevState => {
       return { ...prevState, [event.target.name]: event.target.value }
     });
   };
 
   const clear = () => {
-    setState(initialState);
+    setForm(initialState);
   };
 
   return <article>
@@ -55,7 +55,7 @@ const SignUp = () => {
             type="text"
             name="email"
             placeholder="Email"
-            value={state.email}
+            value={form.email}
             onChange={handleChange}
             required
           ></input>
@@ -65,7 +65,7 @@ const SignUp = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={state.password}
+            value={form.password}
             onChange={handleChange}
             required
           ></input>
@@ -75,7 +75,7 @@ const SignUp = () => {
             type="text"
             name="displayName"
             placeholder="Display Name"
-            value={state.displayName}
+            value={form.displayName}
             onChange={handleChange}
             required
           ></input>

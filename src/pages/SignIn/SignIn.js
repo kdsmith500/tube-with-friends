@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const SignIn = () => {  
-    const [state, setState] = useState(initialState);
+    const [form, setForm] = useState(initialState);
     let navigate = useNavigate()
   
     const handleSubmit = async event => {
@@ -22,13 +22,13 @@ const SignIn = () => {
     };
   
     const handleChange = event => {
-      setState({
-        [event.target.name]: event.target.value
+      setForm(prevState => {
+        return { ...prevState, [event.target.name]: event.target.value }
       });
     };
   
     const clear = () => {
-      setState(initialState);
+      setForm(initialState);
     };
 
     const handleSignInWithGoogle = () => {
@@ -38,7 +38,7 @@ const SignIn = () => {
     }
 
     const handleSignInWithEmailAndPw = () => {
-      signInWithEmailAndPass(state.email, state.password)
+      signInWithEmailAndPass(form.email, form.password)
       .then(() => navigate('/'))
       .catch(error => console.error(error));
     }
@@ -61,7 +61,7 @@ const SignIn = () => {
             type="text"
             name="email"
             placeholder="Email"
-            value={state.email}
+            value={form.email}
             onChange={handleChange}
             required
           ></input>
@@ -71,7 +71,7 @@ const SignIn = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={state.password}
+            value={form.password}
             onChange={handleChange}
             required
           ></input>

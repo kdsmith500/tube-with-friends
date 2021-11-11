@@ -15,6 +15,13 @@ const NavBar = () => {
     navigate('/');
   }
 
+  const takeFirstName = () => {
+    if (user && user.displayName) {
+      const nameArr = user.displayName.split(' ');
+      return nameArr[0];
+    }
+  }
+
   return <header className="NavBar-wrapper">
     <div className="NavBar">
       <Link className="left" to="/">
@@ -27,11 +34,11 @@ const NavBar = () => {
       <div>{user ?
         <div className="right">
           <details className="right-second">
-            <summary>Hey, Buddy</summary>
+            <summary>{`Hey, ${takeFirstName()}`}</summary>
             <Link className="details-option" to="/profile">Profile</Link>
             <div className="details-option-bottom" onClick={handleSignOut}>Sign Out</div>
           </details>
-          <img className="right-first" src="https://placekitten.com/50/50" alt="profile avatar"/>
+          <img className="right-first" src={user && user.photoURL || "https://placekitten.com/50/50"} alt="profile avatar"/>
         </div>
         :
         <nav className="right">
