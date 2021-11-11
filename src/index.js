@@ -7,11 +7,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import UserProvider from './providers/userProvider';
+import ChannelsProvider from './providers/channelsProvider';
 
 render(
   <Router>
     <UserProvider>
-      <App />
+      <ChannelsProvider>
+        <App />
+      </ChannelsProvider>
     </UserProvider>
   </Router>,
   document.getElementById('root')

@@ -1,8 +1,8 @@
 .create-channel-modal {
-  height: calc(80vh - 80px);
+  height: 400px;
   width: 600px;
   position: absolute;
-  top: calc(50% - 40vh + 80px);
+  top: calc(50% - 200px);
   left: calc(50% - 300px);
   z-index: 10;
   border-radius: 8px;

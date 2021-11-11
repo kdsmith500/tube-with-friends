@@ -5,13 +5,32 @@
 
 .channel-list {
   flex: 1;
-  border: 3px solid purple;
 }
 
 .youtube-content {
   flex: 4;
-  border: 3px solid red;
+  border-left: 1px outset gainsboro;
   background-color: snow;
+}
+
+.add-channel {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #2941AB;
+  color: yellow;
+  font-weight: 300;
+  font-size: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+
+.add-channel-icon {
+  margin-bottom: 8px;
 }
 
 @media only screen and (min-width: 1200px) {

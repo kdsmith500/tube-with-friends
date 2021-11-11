@@ -1,0 +1,12 @@
+.channel-list {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 12px;
+}
+
+.channel {
+  margin-bottom: 12px;
+  text-decoration: none;
+  font-size: 18px;
+}

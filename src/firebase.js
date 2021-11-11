@@ -20,6 +20,7 @@ export const db = getFirestore(firebaseApp);
 export const auth = getAuth(firebaseApp);
 export const storage = getStorage(firebaseApp);
 
+export const channelsQ = query(collection(db, 'channels'));
 export const provider = new GoogleAuthProvider(auth);
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
 export const signInWithEmailAndPass = (email, password) => signInWithEmailAndPassword(auth, email, password);

@@ -4,6 +4,7 @@
   height: 80px;
   display: flex;
   align-content: center;
+  border-bottom: 1px inset gainsboro;
 }
 
 .NavBar {

@@ -22,13 +22,15 @@ const Main = () => {
       <section className="main-logged-in">
         <aside className="channel-list">
           <ChannelList />
-          <div onClick={handleCreateChannelModal}>button thingy</div>
+          <div className="add-channel" onClick={handleCreateChannelModal}>
+            <div className="add-channel-icon">+</div>
+          </div>
         </aside>
         <section className="youtube-content">
           youTube content, popular vids or recents or some cheap query...
         </section>
       </section>
-      {showCreateChannelModal ? null : <CreateChannelModal toggle={() => handleCreateChannelModal()} />}
+      {showCreateChannelModal ? <CreateChannelModal toggle={() => handleCreateChannelModal()} /> : null}
     </article>
     :
     <article>
