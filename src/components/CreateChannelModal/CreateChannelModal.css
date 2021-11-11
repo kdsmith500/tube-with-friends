@@ -1,0 +1,41 @@
+.create-channel-modal {
+  height: calc(80vh - 80px);
+  width: 600px;
+  position: absolute;
+  top: calc(50% - 40vh + 80px);
+  left: calc(50% - 300px);
+  z-index: 10;
+  border-radius: 8px;
+  background-color: #2941AB;
+  color: yellow;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.create-channel-form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.create-channel-title {
+  font-size: 48px;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-weight: bold;
+}
+
+.button {
+  align-self: flex-end;
+}
+
+label {
+  margin-bottom: 8px;
+  align-self: flex-start;
+}
