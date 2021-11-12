@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, onSnapshot, collection, addDoc, querySnapshot, snapshot } from "firebase/firestore";
+import { doc, onSnapshot, collection, addDoc, querySnapshot, snapshot, serverTimestamp } from "firebase/firestore";
 
 import styles from './Channel.module.css';
 
@@ -51,15 +51,20 @@ const Channel = () => {
 
   useEffect(() => {
     const handleChatChange = async () => {
-      unsubscribeFromChatRef.current = onSnapshot(chatRef, (querySnapshot) => {
+      unsubscribeFromChatRef.current = await onSnapshot(chatRef, (querySnapshot) => {
+        // the firestore timestamp is not made until createAt is written on the server,
+        // this causes null to come back on the frist snapshot,
+        // this line breaks the function to avoid blowing up on null,
+        // there is probably a better place to use this logic to control how much the screen changes while rendering
+        if (querySnapshot.metadata.hasPendingWrites) return;
+
         const c = querySnapshot.docs.map(collectIdsAndDocs);
 
-        // const sortedChat = c.sort((a, b) => {
-        //   return a.createdAt.toDate() - b.createdAt.toDate();
-        // }) 
+        const sortedChat = c.sort((a, b) => {
+            return a.createdAt.toDate() - b.createdAt.toDate();
+        }) 
 
-        // return setChat(sortedChat);
-        return setChat(c);
+        return setChat(sortedChat);
       })
     };
 
@@ -77,7 +82,8 @@ const Channel = () => {
 
     return addDoc(chatRef, {
       newChat,
-      user
+      user,
+      createdAt: serverTimestamp()
     })
     .then(() => setNewChat(''))
     .catch(error => console.error(error));
