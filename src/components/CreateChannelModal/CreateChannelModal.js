@@ -36,8 +36,6 @@ const CreateChannelModal = ({ toggle }) => {
         email,
         photoURL
       },
-      chat: [],
-      queue: [],
       createdAt: new Date(),
     }
 

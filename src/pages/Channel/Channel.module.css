@@ -1,40 +1,3 @@
-/* .channel {
-  height: calc(100vh - 80px);
-  display: flex;
-}
-
-.video-queue-chat {
-  display: flex;
-  flex-flow: column;
-}
-
-.video-queue {
-  display: flex;
-}
-
-.users {
-  width: 20vw;
-  border: 1px solid green;
-}
-
-.chat {
-  height: 20vh;
-  width: 80vw;
-  border: 1px solid blue;
-}
-
-.queue {
-  height: calc(80vh - 80px);
-  width: 20vw;
-  border: 1px solid purple;
-}
-
-.video {
-  width: 60vw;
-  height: calc(80vh - 80px);
-  border: 1px solid red;
-} */
-
 .channel {
   display: grid;
   grid-template-columns: 20vw 60vw 20vw;
@@ -71,4 +34,19 @@
   grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 3;
+  /* display: flex;
+  flex-flow: column; */
+}
+
+.chatLog {
+}
+
+.chatLine {
+}
+
+.newChatForm {
+  /* align-self: flex-end; */
+  position: absolute;
+  bottom: 0;
+  right: 18px;
 }

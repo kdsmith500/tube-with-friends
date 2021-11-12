@@ -17,10 +17,9 @@ const ChannelList = () => {
 
   return <section className="channel-list">
     {channels.map(channel => {
-      return <div className="channel">
+      return <div className="channel" key={channel.id}>
         <Link
           className="channel-link"
-          key={channel.id}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           to={`/channel/${channel.id}`}

@@ -16,7 +16,6 @@ const UserProvider = ( props ) => {
     // async in useEffect might be considered an anti-pattern
     const handleAuthChange = async () => {
       unsubscribeFromAuthRef.current = onAuthStateChanged(auth, async userAuth => {
-        console.log(userAuth);
 
         if (userAuth) {
           const userRef = await createUserProfileDocument(userAuth);
@@ -26,8 +25,6 @@ const UserProvider = ( props ) => {
         }
   
         setUser(userAuth);
-
-        console.log(props)
       })
     }
 
