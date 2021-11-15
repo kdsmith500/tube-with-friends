@@ -34,18 +34,22 @@
   grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 3;
-  /* display: flex;
-  flex-flow: column; */
 }
 
 .chatLog {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  padding: 0 16px;
 }
 
 .chatLine {
 }
 
 .newChatForm {
-  /* align-self: flex-end; */
   position: absolute;
   bottom: 0;
   right: 18px;

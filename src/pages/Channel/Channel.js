@@ -30,6 +30,7 @@ const Channel = () => {
 
   const unsubscribeFromChannelRef = useRef(null);
   const unsubscribeFromChatRef = useRef(null);
+  const chatEndRef = useRef(null);
 
   useEffect(() => {
     const handleChannelChange = async () => {
@@ -77,6 +78,10 @@ const Channel = () => {
     return cleanup;
   }, []);
 
+  useEffect(() => {
+    scrollToBottom()
+  }, [chat]);
+
   const handleNewChat = event => {
     event.preventDefault();
 
@@ -94,6 +99,10 @@ const Channel = () => {
     setNewChat(event.target.value);
   }
 
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView(false);
+  }
+
   return <div>
     <NavBar />
     <article className={styles.channel}>
@@ -103,7 +112,7 @@ const Channel = () => {
       <section className={styles.chat}>
         <div className={styles.chatLog}>
           {chat.map((c, idx) => {
-            return <div className={styles.chatLine} key={idx}>{c.newChat}</div>
+            return <div className={styles.chatLine} ref={chatEndRef} key={idx}>{c.newChat}</div>
           })}
         </div>
         <form className={styles.newChatForm} onSubmit={handleNewChat}>
