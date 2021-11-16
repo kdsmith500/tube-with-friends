@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, onSnapshot, collection, addDoc, querySnapshot, snapshot, serverTimestamp } from "firebase/firestore";
+import { doc, onSnapshot, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 import styles from './Channel.module.css';
 
@@ -65,7 +65,8 @@ const Channel = () => {
             return a.createdAt.toDate() - b.createdAt.toDate();
         }) 
 
-        return setChat(sortedChat);
+        setChat(sortedChat);
+        return scrollToBottom();
       })
     };
 
@@ -73,14 +74,11 @@ const Channel = () => {
 
     const cleanup = () => {
       unsubscribeFromChatRef.current = null;
+      chatEndRef.current = null;
     };
 
     return cleanup;
   }, []);
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [chat]);
 
   const handleNewChat = event => {
     event.preventDefault();
@@ -99,6 +97,7 @@ const Channel = () => {
     setNewChat(event.target.value);
   }
 
+  // scrolls chat div to last line
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView(false);
   }
@@ -126,7 +125,6 @@ const Channel = () => {
             className="button"
             type="submit"
             value="Send"
-            // onClick={}
           ></input>
         </form>
       </section>
