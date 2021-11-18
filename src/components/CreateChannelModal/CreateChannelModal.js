@@ -26,17 +26,20 @@ const CreateChannelModal = ({ toggle }) => {
 
     const { channelName, description } = form;
     const { uid, displayName, email, photoURL } = auth.currentUser || {};
+    
+    const currentUser = {
+      uid,
+      displayName,
+      email,
+      photoURL
+    };
 
     const channel = {
       channelName,
       description,
-      user: {
-        uid,
-        displayName,
-        email,
-        photoURL
-      },
+      user: currentUser,
       createdAt: new Date(),
+      users: [currentUser]
     }
 
     addDoc(channelsQ, channel)

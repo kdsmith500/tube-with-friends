@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, onSnapshot, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, onSnapshot, collection, addDoc, serverTimestamp, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 import styles from './Channel.module.css';
 
 import NavBar from '../../components/NavBar';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import { UserContext } from "../../providers/userProvider";
 import { collectIdsAndDocs } from "../../utilities";
 
@@ -25,8 +25,8 @@ const Channel = () => {
   const user = useContext(UserContext);
 
   const urlParams = useParams();
-  const docRef = doc(db, 'channels', urlParams.id);
-  const chatRef = collection(docRef, "chat");
+  const channelRef = doc(db, 'channels', urlParams.id);
+  const chatRef = collection(channelRef, "chat");
 
   const unsubscribeFromChannelRef = useRef(null);
   const unsubscribeFromChatRef = useRef(null);
@@ -34,17 +34,19 @@ const Channel = () => {
 
   useEffect(() => {
     const handleChannelChange = async () => {
-      unsubscribeFromChannelRef.current = onSnapshot(docRef, (snapshot) => {   
+      unsubscribeFromChannelRef.current = onSnapshot(channelRef, (snapshot) => {   
         const data = snapshot.data(); 
 
         setChannel(data);
       })
     };
 
+    handleUserEntrance();
     handleChannelChange();
 
     const cleanup = () => {
       unsubscribeFromChannelRef.current = null;
+      handleUserExit();
     };
 
     return cleanup;
@@ -92,15 +94,45 @@ const Channel = () => {
     .catch(error => console.error(error));
   }
 
+  const handleUserEntrance = () => {
+    const { uid, displayName, email, photoURL } = auth.currentUser || {};
+
+    const currentUser = {
+      uid,
+      displayName,
+      email,
+      photoURL
+    };
+    
+    return updateDoc(channelRef, {
+      users: arrayUnion(currentUser)
+    });
+  };
+
+  const handleUserExit = () => {
+    const { uid, displayName, email, photoURL } = auth.currentUser || {};
+
+    const currentUser = {
+      uid,
+      displayName,
+      email,
+      photoURL
+    };
+    
+    return updateDoc(channelRef, {
+      users: arrayRemove(currentUser)
+    });
+  }
+
   const handleChange = event => {
     // should always have just one input
     setNewChat(event.target.value);
-  }
+  };
 
   // scrolls chat div to last line
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView(false);
-  }
+  };
 
   return <div>
     <NavBar />
